@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Converter Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyCaRqmfvXAfKjmh5T-vRv5BgqIRhvh7C5I",
+    authDomain: "converterapp-fb7ae.firebaseapp.com",
+    projectId: "converterapp-fb7ae",
+    storageBucket: "converterapp-fb7ae.firebasestorage.app",
+    messagingSenderId: "52811102839",
+    appId: "1:52811102839:web:a892e4bb369942030ae472"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside id="sidebar" class="sidebar">
+      <button id="toggleBtn">☰</button>
+      <ul>
+        <li><button onclick="showPanel('text')">Text Converter</button></li>
+        <li><button onclick="showPanel('file')">File Converter</button></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <!-- Text Panel -->
+      <section id="textPanel" class="panel">
+        <h2>Text Converter</h2>
+        <textarea id="textInput" placeholder="Enter your text here..."></textarea>
+        <div class="buttons">
+          <button onclick="convertText('upper')">UPPER CASE</button>
+          <button onclick="convertText('lower')">lower case</button>
+          <button onclick="convertText('proper')">Proper Case</button>
+          <button onclick="convertText('sentence')">Sentence case</button>
+        </div>
+        <textarea id="textOutput" placeholder="Output..." readonly></textarea>
+      </section>
+
+      <!-- File Panel -->
+      <section id="filePanel" class="panel hidden">
+        <h2>File Converter</h2>
+        <input type="file" id="fileInput" />
+        <select id="fileType">
+          <option value="pdf">PDF</option>
+          <option value="docx">DOCX</option>
+          <option value="txt">TXT</option>
+          <option value="jpg">JPG</option>
+          <option value="png">PNG</option>
+          <option value="xlsx">XLSX</option>
+          <option value="pptx">PPTX</option>
+          <option value="mp3">MP3</option>
+          <option value="mp4">MP4</option>
+        </select>
+        <button onclick="convertFile()">Convert</button>
+        <div id="downloadArea"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
